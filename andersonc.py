@@ -128,3 +128,8 @@ print("Redirected Requests:", redirected_requests, "({:.2f}%)".format(redirected
 # Output most and least requested file
 print("\nMost Requested File:", most_requested)
 print("Least Requested File:", least_requested)
+
+# Splits the log file into 12 months
+for month, requests in monthly_requests.items():
+    with open(f"{month}.log", "w") as outfile:
+        outfile.writelines(requests)
