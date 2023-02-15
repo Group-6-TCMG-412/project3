@@ -12,6 +12,9 @@ local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE)
 # Keep track of the number of requests
 total_requests = 0
 
+# Keep track of lines in the log file that are not complete requests
+invalid_requests = 0
+
 # Track the number of requests made on each day
 day_count = defaultdict(int)
 
@@ -89,7 +92,11 @@ for line in open(LOCAL_FILE):
         else:
         # This is a new filename -- let's add it to the dictionary
             files_dict[file_name] = 1
-
+            
+    # Catch case for invalid requests that are not full request lines
+    elif len(pieces) < 7:
+        invalid_requests += 1
+            
 # Calculate percentage of unsuccessful requests
 unsuccessful_percent = unsuccessful_requests / total_requests * 100
 
@@ -103,7 +110,9 @@ most_requested = max(files_dict.keys(), key=(lambda k: files_dict[k]))
 least_requested = min(files_dict.keys(), key=(lambda k: files_dict[k]))
 
 # Output total requests
-print("Total Requests:", total_requests)
+print("Total Requests:", total_requests + invalid_requests)
+print("Total Valid Requests:", total_requests)
+print("Total Incomplete/invalid Requests:", invalid_requests)
 
 #Output how many requests were made on each day
 print("\nRequests Made Each Day:")
