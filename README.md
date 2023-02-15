@@ -1,6 +1,6 @@
 ## This repository is for Project 3 and Project 4
 
-# Project 3, Using Python to parse and analyze log files from an Apache web server: main.py
+# Project 3, Using Python to parse and analyze log files from an Apache web server: main.py (found in obsolete folder)
 Please run the following commands in sequence on your Linux machine for main.py.
 1. 'sudo apt update'
 2. 'sudo apt upgrade'
